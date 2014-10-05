@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title></title>
+	<link rel="stylesheet"  href="css/jquery.mobile.min.css">
+	<style>
+		#homeBanner {
+			width: 60%;
+		}
+		.center {
+			text-align: center;
+			margin-left: auto;
+			margin-right:auto;
+		}
+		.banner {
+			display:block;
+			width: 100%;
+			height: 5%;
+		}
+		#qrcode {
+			display:block;	
+			margin-left: auto;
+			margin-right:auto;
+		}
+		#map2 {
+			margin-left: auto;
+			margin-right:auto;
+			width: 320px;
+			height: 320px;  
+		}
+	</style>
+	<link rel="stylesheet" href="css/leaflet.css" />
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.mobile.min.js"></script>
+
+</head>
+	
+<body>
+<div id="homeScreen" data-role="page">
+	<img src="imgs/tamil.jpg" class="banner" />
+	<div data-role="content">
+	<form>
+    <label for="flip-1">Click to Activate :</label>
+    <select id="flip-1" name="flip-1" data-role="slider">
+        <option value="off">Off</option>
+        <option value="on">On</option>
+    </select>
+</form>
+	
+	<ul data-role="listview"  data-filter="true" data-inset="true" class="ui-nodisc-icon ui-alt-icon">
+	
+				<li><a href="#list3"><img src="data:image/jpeg;base64,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">
+				<h2>MySkills Foundation</h2>
+				<p>Custom small icons</p></a>
+			</li>
+			
+						<li><a href="#list1"><img src="imgs/Vision_thumb.png">
+				<h2>Primus</h2>
+				<p>Numbered and without number</p></a>
+			</li>
+	
+			<li><a href="#list4"><img src="imgs/Westhoff_thumb.png">
+				<h2>Akkini Vision </h2>
+				<p>Anchor jump scroll linkbars </p></a>
+			</li>
+			<li><a href="#list5"><img src="imgs/101733188_thumb.png">
+				<h2>Tamil Eelam</h2>
+				<p>Dividers, paragraphs and more</p></a>
+			</li>
+			<li><a href="#simple"><img src="imgs/106588354_thumb.png">
+				<h2>Linked List</h2>
+				<p>List items with links are styled as button</p></a>
+			</li>
+			<li><a href="#list7"><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Dravidische_Sprachen.png/640px-Dravidische_Sprachen.png">
+				<h2>தமிழன் </h2>
+				<p>A and B swatches theming styles</p></a>
+			</li>
+
+			<li><a href="#list8"><img src="http://upload.wikimedia.org/wikipedia/commons/9/93/Tamil_eelam_map.svg">
+				<h2>தமிழ் ஈழம் </h2>
+				<p>Default list with no link</p></a>
+			</li>
+					<li><a href="http://omtamil.tv"><img src="imgs/omtamil.tv.png">
+				<h2>Web Link</h2>
+				<p>Link to external hyperlink</p></a>
+			</li>
+			
+		</ul>
+
+	
+		<div class="ui-grid-a center">
+    		<div class="ui-block-a">
+				<a href="#aboutScreen" class="ui-btn ui-corner-all ui-icon-info ui-btn-icon-notext ui-btn-inline ui-nodisc-icon ui-alt-icon">Info</a>
+			</div>
+    		<div class="ui-block-b">
+				<a href="#mapScreen" class="ui-btn ui-corner-all ui-icon-location ui-btn-icon-notext ui-btn-inline ui-nodisc-icon ui-alt-icon">Map</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div id="list1" data-role="page"> /
+	<header data-role="header" data-position="fixed" data-id="appHeader">
+		<h1>OMTAMIL</h1>
+		<a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>
+	</header>
+	<div data-role="content">
+	<h1 class="center">Read-only, unordered List</h1>
+<ul data-role="listview">
+    <li>Acura</li>
+    <li>Audi</li>
+    <li>BMW</li>
+    <li>Cadillac</li>
+    <li>Ferrari</li>
+</ul>
+
+<h1 class="center">Read-only, ordered List</h1>
+<ol data-role="listview">
+    <li>Acura</li>
+    <li>Audi</li>
+    <li>BMW</li>
+    <li>Cadillac</li>
+    <li>Ferrari</li>
+</ol>
+
+	</div>
+</div>
+
+
+<div id="list3" data-role="page">
+	<header data-role="header" data-position="fixed" data-id="appHeader">
+		<h1>OMTAMIL</h1>
+		<a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>
+	</header>
+	<div data-role="content">
+
+		<h1 class="center">MySkills Foundation </h1>
+		<ul data-role="listview"  data-filter="true" data-inset="true" class="ui-nodisc-icon ui-alt-icon">
+    <li><a href="#"><img src="imgs/gf.png" alt="France" class="ui-li-icon ui-corner-none">France</a></li>
+    <li><a href="#"><img src="imgs/de.png" alt="Germany" class="ui-li-icon">Germany</a></li>
+    <li><a href="#"><img src="imgs/gb.png" alt="Great Britain" class="ui-li-icon">Great Britain</a></li>
+    <li><a href="#"><img src="imgs/fi.png" alt="Finland" class="ui-li-icon">Finland</a></li>
+    <li><a href="#"><img src="imgs/us.png" alt="United States" class="ui-li-icon ui-corner-none">United States</a></li>
+</ul>
+	</div>
+</div>
+
+
+<div id="list4" data-role="page">
+	<header data-role="header" data-position="fixed" data-id="appHeader">
+		<h1>OMTAMIL</h1>
+		<a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>
+	</header>
+	<div data-role="content">
+	<h1 class="center">Autodividers List</h1>
+		<ul data-role="listview" data-autodividers="true" data-filter="true" data-inset="true">
+    <li><a href="index.html">Adam Kinkaid</a></li>
+    <li><a href="index.html">Alex Wickerham</a></li>
+    <li><a href="index.html">Avery Johnson</a></li>
+    <li><a href="index.html">Bob Cabot</a></li>
+    <li><a href="index.html">Caleb Booth</a></li>
+    <li><a href="index.html">Christopher Adams</a></li>
+    <li><a href="index.html">Culver James</a></li>
+</ul>
+	</div>
+</div>
+
+
+<div id="list5" data-role="page">
+	<header data-role="header" data-position="fixed" data-id="appHeader">
+		<h1>OMTAMIL</h1>
+		<a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>
+	</header>
+	<div data-role="content">
+	<h1 class="center">Formatted Content List</h1>
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider">Friday, October 8, 2010 <span class="ui-li-count">2</span></li>
+    <li><a href="index.html">
+    <h2>Stephen Weber</h2>
+    <p><strong>You've been invited to a meeting at Filament Group in Boston, MA</strong></p>
+    <p>Hey Stephen, if you're available at 10am tomorrow, we've got a meeting with the jQuery team.</p>
+        <p class="ui-li-aside"><strong>6:24</strong>PM</p>
+    </a></li>
+    <li><a href="index.html">
+    <h2>jQuery Team</h2>
+    <p><strong>Boston Conference Planning</strong></p>
+    <p>In preparation for the upcoming conference in Boston, we need to start gathering a list of sponsors and speakers.</p>
+        <p class="ui-li-aside"><strong>9:18</strong>AM</p>
+    </a></li>
+    <li data-role="list-divider">Thursday, October 7, 2010 <span class="ui-li-count">1</span></li>
+    <li><a href="index.html">
+    <h2>Avery Walker</h2>
+    <p><strong>Re: Dinner Tonight</strong></p>
+    <p>Sure, let's plan on meeting at Highland Kitchen at 8:00 tonight. Can't wait!</p>
+        <p class="ui-li-aside"><strong>4:48</strong>PM</p>
+    </a></li>
+</ul>
+	</div>
+</div>
+
+
+<div id="list6" data-role="page">
+	<header data-role="header" data-position="fixed" data-id="appHeader">
+		<h1>OMTAMIL</h1>
+		<a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>
+	</header>
+	<div data-role="content">
+	<h1 class="center">Form</h1>
+<form>
+    <ul data-role="listview" data-inset="true">
+        <li class="ui-field-contain">
+            <label for="name2">Text Input:</label>
+            <input type="text" name="name2" id="name2" value="" data-clear-btn="true">
+        </li>
+        <li class="ui-field-contain">
+            <label for="textarea2">Textarea:</label>
+        <textarea cols="40" rows="8" name="textarea2" id="textarea2"></textarea>
+        </li>
+        <li class="ui-field-contain">
+            <label for="flip2">Flip switch:</label>
+            <select name="flip2" id="flip2" data-role="slider">
+                <option value="off">Off</option>
+                <option value="on">On</option>
+            </select>
+        </li>
+        <li class="ui-field-contain">
+            <label for="slider2">Slider:</label>
+            <input type="range" name="slider2" id="slider2" value="0" min="0" max="100" data-highlight="true">
+        </li>
+        <li class="ui-field-contain">
+            <label for="select-choice-1" class="select">Choose shipping method:</label>
+            <select name="select-choice-1" id="select-choice-1">
+                <option value="standard">Standard: 7 day</option>
+                <option value="rush">Rush: 3 days</option>
+                <option value="express">Express: next day</option>
+                <option value="overnight">Overnight</option>
+            </select>
+        </li>
+        <li class="ui-body ui-body-b">
+            <fieldset class="ui-grid-a">
+                    <div class="ui-block-a"><button type="submit" class="ui-btn ui-corner-all ui-btn-a">Cancel</button></div>
+                    <div class="ui-block-b"><button type="submit" class="ui-btn ui-corner-all ui-btn-a">Submit</button></div>
+            </fieldset>
+        </li>
+    </ul>
+</form>
+	</div>
+</div>
+
+
+<div id="list7" data-role="page">
+	<header data-role="header" data-position="fixed" data-id="appHeader">
+		<h1>OMTAMIL</h1>
+		<a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>
+	</header>
+	<div data-role="content">
+	<h1 class="center">Theme</h1>
+<ul data-role="listview" data-inset="true" data-theme="b" data-divider-theme="a" data-count-theme="a">
+    <li data-role="list-divider">Divider</li>
+    <li><a href="index.html" data-theme="a">Inbox <span class="ui-li-count">12</span></a></li>
+    <li><a href="index.html">Outbox <span class="ui-li-count">0</span></a></li>
+    <li><a href="index.html">Sent <span class="ui-li-count">328</span></a></li>
+</ul>
+
+<ul data-role="listview" data-inset="true" data-theme="a" data-divider-theme="b" data-count-theme="b">
+    <li data-role="list-divider">Divider</li>
+    <li><a href="index.html" data-theme="b">Inbox <span class="ui-li-count">12</span></a></li>
+    <li><a href="index.html">Outbox <span class="ui-li-count">0</span></a></li>
+    <li><a href="index.html">Sent <span class="ui-li-count">328</span></a></li>
+</ul>
+	</div>
+</div>
+
+<div id="list8" data-role="page">
+	<header data-role="header" data-position="fixed" data-id="appHeader">
+		<h1>தமிழ்  ஈழம் </h1>
+		<a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>
+	</header>
+	<div data-role="content">
+	 <table data-role="table" id="table-column-toggle" data-mode="columntoggle" class="ui-responsive table-stroke">
+     <thead>
+       <tr>
+         <th data-priority="2">Rank</th>
+         <th>Movie Title</th>
+         <th data-priority="3">Year</th>
+         <th data-priority="1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+         <th data-priority="5">Reviews</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <th>1</th>
+         <td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
+         <td>1941</td>
+         <td>100%</td>
+         <td>74</td>
+       </tr>
+       <tr>
+         <th>2</th>
+         <td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-rel="external">Casablanca</a></td>
+         <td>1942</td>
+         <td>97%</td>
+         <td>64</td>
+       </tr>
+       <tr>
+         <th>3</th>
+         <td><a href="http://en.wikipedia.org/wiki/The_Godfather" data-rel="external">The Godfather</a></td>
+         <td>1972</td>
+         <td>97%</td>
+         <td>87</td>
+       </tr>
+       <tr>
+         <th>4</th>
+         <td><a href="http://en.wikipedia.org/wiki/Gone_with_the_Wind_(film)" data-rel="external">Gone with the Wind</a></td>
+         <td>1939</td>
+         <td>96%</td>
+         <td>87</td>
+       </tr>
+       <tr>
+         <th>5</th>
+         <td><a href="http://en.wikipedia.org/wiki/Lawrence_of_Arabia_(film)" data-rel="external">Lawrence of Arabia</a></td>
+         <td>1962</td>
+         <td>94%</td>
+         <td>87</td>
+       </tr>
+       <tr>
+         <th>6</th>
+         <td><a href="http://en.wikipedia.org/wiki/Dr._Strangelove" data-rel="external">Dr. Strangelove Or How I Learned to Stop Worrying and Love the Bomb</a></td>
+         <td>1964</td>
+         <td>92%</td>
+         <td>74</td>
+       </tr>
+       <tr>
+         <th>7</th>
+         <td><a href="http://en.wikipedia.org/wiki/The_Graduate" data-rel="external">The Graduate</a></td>
+         <td>1967</td>
+         <td>91%</td>
+         <td>122</td>
+       </tr>
+       <tr>
+         <th>8</th>
+         <td><a href="http://en.wikipedia.org/wiki/The_Wizard_of_Oz_(1939_film)" data-rel="external">The Wizard of Oz</a></td>
+         <td>1939</td>
+         <td>90%</td>
+         <td>72</td>
+       </tr>
+       <tr>
+         <th>9</th>
+         <td><a href="http://en.wikipedia.org/wiki/Singin%27_in_the_Rain" data-rel="external">Singin' in the Rain</a></td>
+         <td>1952</td>
+         <td>89%</td>
+         <td>85</td>
+       </tr>
+       <tr>
+         <th>10</th>
+         <td class="title"><a href="http://en.wikipedia.org/wiki/Inception" data-rel="external">Inception</a></td>
+         <td>2010</td>
+         <td>84%</td>
+         <td>78</td>
+       </tr>
+     </tbody>
+   </table>
+    </div>
+     
+</div>
+
+<div id="list9" data-role="page">
+	<header data-role="header" data-position="fixed" data-id="appHeader">
+		<h1>OMTAMIL</h1>
+		<a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>
+	</header>
+	<div data-role="content">
+	<h1 class="center">Filter reveal</h1>
+<ul data-role="listview" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Search fruits..." data-inset="true">
+    <li><a href="#">Apple</a></li>
+    <li><a href="#">Banana</a></li>
+    <li><a href="#">Cherry</a></li>
+    <li><a href="#">Cranberry</a></li>
+    <li><a href="#">Grape</a></li>
+    <li><a href="#">Orange</a></li>
+</ul>
+	</div>
+</div>
+
+
+<div id="list10" data-role="page">
+	<header data-role="header" data-position="fixed" data-id="appHeader">
+		<h1>OMTAMIL</h1>
+		<a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>
+	</header>
+	<div data-role="content">
+	<h1 class="center">Count bubbles</h1>
+<ul data-role="listview" data-count-theme="b" data-inset="true">
+    <li><a href="#">Inbox <span class="ui-li-count">12</span></a></li>
+    <li><a href="#">Outbox <span class="ui-li-count">0</span></a></li>
+    <li><a href="#">Drafts <span class="ui-li-count">4</span></a></li>
+    <li><a href="#">Sent <span class="ui-li-count">328</span></a></li>
+    <li><a href="#">Trash <span class="ui-li-count">62</span></a></li>
+</ul>
+	</div>
+</div>
+
+<div id="tab" data-role="page">
+	<header data-role="header" data-position="fixed" data-id="appHeader">
+		<h1>TAB SAMPLE</h1>
+		<a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>
+	</header>
+	<div data-role="content">
+		<div data-role="tabs" id="tabs">
+  <div data-role="navbar">
+    <ul>
+      <li><a href="#one" data-ajax="false">one</a></li>
+      <li><a href="#two" data-ajax="false">two</a></li>
+      <li><a href="ajax-content-ignore.html" data-ajax="false">three</a></li>
+    </ul>
+  </div>
+  <div id="one" class="ui-body-d ui-content">
+    <h1>First tab contents</h1>
+  </div>
+  <div id="two">
+    <ul data-role="listview" data-inset="true">
+        <li><a href="#">Acura</a></li>
+        <li><a href="#">Audi</a></li>
+        <li><a href="#">BMW</a></li>
+        <li><a href="#">Cadillac</a></li>
+        <li><a href="#">Ferrari</a></li>
+    </ul>
+  </div>
+</div>
+	</div>
+</div>
+
+<div id="red" data-role="page">
+	<header data-role="header" data-position="fixed" data-id="appHeader">
+		<h1>RED</h1>
+		<a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>
+	</header>
+	<div data-role="content">
+		<h2 class="center">San Angelico Museum of Contemporary Art</h2>
+		<p class="center">123 Main Street Ventura, CA 12345<br>(800)555-1212</p>
+		<div id="map2"><img src="imgs/101733188_thumb.png"></div>
+	</div>
+</div>
+	
+<div id="simple" data-role="page">
+	<header data-role="header" data-position="fixed" data-id="appHeader">
+		<h1>Simple List</h1>
+		<a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>
+	</header>
+	<div data-role="content">
+
+	
+	
+	
+	
+	
+		<ul data-role="listview" data-inset="true" class="ui-nodisc-icon ui-alt-icon">
+			<li><a href="#list6">Form</a></li>
+			<li><a href="#list8">Grouped collapsible with listviews</a></li>
+			<li><a href="#list9">Filter reveal</a></li>
+				<li><a href="#list10">Count bubbles</a></li>
+					<li><a href="#red">Text and Image Content</a></li>
+
+		</ul>
+	</div>
+</div>	
+	
+	
+<div id="mapScreen" data-role="page">
+	<header data-role="header" data-position="fixed" data-id="appHeader">
+		<h1>OMTAMIL</h1>
+		<a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>
+	</header>
+	<div data-role="content">
+		<h2 class="center">OMTAMIL DOTCOM</h2>
+		<p class="center">No. 16, Jln SL9/9A, Palm Walk, Bandar Sg Long ,<br>43200 Selangor MALAYSIA</p>
+
+		<p class="center"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d996.0391590093255!2d101.80669599999999!3d3.0527080000000093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc3367e9ed6c9f%3A0x38d1b5e827f2b4cf!2sJalan+SL+9%2F9a%2C+Bandar+Sungai+Long%2C+43000+Kajang%2C+Selangor!5e0!3m2!1sta!2smy!4v1412396778230" width="100%" height="400" frameborder="0" style="border:0"></iframe></p>
+
+	</div>
+</div>
+
+
+
+
+<div id="aboutScreen" data-role="page">
+	<header data-role="header" data-position="fixed" data-id="appHeader">
+		<h1>OMTAMIL</h1>
+		<a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>
+	</header>
+	<div data-role="content">
+		<h2 class="center">OMTAMIL DOTCOM (002135971-U)</h2>
+		
+		<img class="center banner" src="imgs/omtamil-dotcom.png" />
+		OMTAMIL DOTCOM (002135971-U), IS A REGISTERED ENTERPRISE IN MALAYSIA SINCE 2012. WE OFFER ONLINE-MOBILE TRAINING AND SERVICES (E-LEARNING, MOBILE APPS, WEB TOOLS, SOCIAL MEDIA, MULTIMEDIA, E-COMMERCE) TO SCHOOLS, INSTITUTES, COLLEGES, UNIVERSITIES, EDUCATORS, BUSINESSES, ORGANIZATIONS, AND INDIVIDUALS IN BOTH TAMIL AND ENGLISH.</p>
+	</div>
+</div>
+	<!--
+	Admission
+	Directions
+	Parking
+	Hours
+	Volunteer
+	-->
+</body>
+</html>
