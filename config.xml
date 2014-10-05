@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns = "http://www.w3.org/ns/widgets"
 	xmlns:gap = "http://phonegap.com/ns/1.0"
-	id        = "com.omtamil.demoapp"
+	id        = "Test.Mysillsoapp"
 	versionCode="1"
 	version   = "1.0">
-<name>OMTAMIL DEMO APP</name>
+<name>MySkills Test APP</name>
 <description>
 A Demo App for Mobile Development Workshop</description>
-<author href="omtamil.com" 
-email="muhelen@omtamil.com">
-MUHELEN MURUGAN
+<author href="V.S.P.PARTHEEBN" 
+email="partheeban8886@gmail.com">
+V.S.P.PARTHEEBAN
 </author>
 	
 	<!-- Define app icon MAIN ROOT Platform. -->
